@@ -1,0 +1,72 @@
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mis-Perris</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/main2.css' %}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/menu.css' %}" />
+    <link rel="stylesheet" media="screen and (max-width:500px)" href="{% static 'css/celregi.css' %}">
+</head>
+<body>
+    <header>
+            <ul>
+                <li><img id="logo" src="{% static 'img/logo.png' %}" alt="logo mis perris"></li>
+                <li><a href="{% url 'Index' %}">~Inicio~</a></li>
+                <li><a href="{% url 'Registro' %}">~Registro~</a></li>
+                <div class="log">
+                    {% if user.is_authenticated %}
+                    <div class="textomenu">Bienvenido {{user}}!!</div>
+                    <a href="{% url 'logout' %}">logout</a>
+                    {% else %}
+                    <div class="textomenu">Inicia aqui!</div>
+                    <a href="{% url 'login' %}" style="font-size: 21px;">login</a>
+                    {% endif %}
+                </div>
+            </ul>
+    </header>
+    <nav>
+        <h1>-Registro-</h1>
+        <hr>
+    </nav>
+    <div class="box">
+        <h3>Nuevo Adoptante</h3>
+        {% block content %}
+            <form method="POST">{% csrf_token %}
+                {{ form.as_p }}
+                <center><button type="submit" class="boton_personalizado">Guardar</button></center> 
+            </form>
+        {% endblock %}
+    </div>
+    
+        
+    <footer>
+        <table>
+            <tr>
+                <td>&#9993; <b>Email</b></td>
+                <td>
+                    <a href="mailto:HelpDog@gmail.com">
+                            HelpDog@gmail.com
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>&#9742; <b>Telefono</b></td>
+                <td>
+                    <a href="tel:+56920202020">
+                            +569 2020 2020
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <b>&copy; Todos los derechos reservados.</b> 
+                </td>
+            </tr>
+        </table>
+    </footer> 
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
